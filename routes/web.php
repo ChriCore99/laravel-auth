@@ -19,14 +19,18 @@ Route::get('/', function () {
 });
 
 // nuovo gruppo di rotte e middleware
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified'])
+    // influisce sul nome delle rotte
+    ->name('admin.')
+    // influisce sull'url delle rote (se uso il prefix nella route sottostante dovrò cancellare "admin" dopo lo / altrimenti darà errore)
+    ->prefix('admin')
+    ->group(function () {
 
-    Route::get('/admin', function () {
+    Route::get('/', function () {
         return view('admin.dashboard');
     })->name('dashboard');
 
     // creo altre rotte - crud
-    
 
 });
 
