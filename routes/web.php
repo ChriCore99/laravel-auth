@@ -18,9 +18,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// nuovo gruppo di rotte e middleware
+Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::get('/admin', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+
+    // creo altre rotte - crud
+    
+
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
